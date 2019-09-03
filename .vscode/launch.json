@@ -1,0 +1,11 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - Impact",
+            "request": "launch",
+            "mainClass": "Impact",
+            "projectName": "impac_solution_1edaebd"
+        }
+    ]
+}
