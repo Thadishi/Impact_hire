@@ -2,9 +2,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 import java.util.stream.Stream;
-import java.io.*;
+
 import java.util.List;
 
 
@@ -23,13 +22,34 @@ public class Impact implements NumberRangeSummarizer{
         return items;
     }
 
+    public StringBuilder copy(StringBuilder stringb, int start,  int prev){
+
+        stringb.append(start);
+
+        if(start!=prev) stringb.append(prev-start >1? "-":", ").append(prev);
+        return stringb;
+    }
+    
+
     @Override
     public String summarizeCollection(Collection<Integer> input) {
         String summary = "";
         
+        StringBuilder stringb = new StringBuilder();
+        
+        List<Integer> userInput = new ArrayList<>(input);
 
+        int prev = userInput.get(0), start = prev;
+        for( int x : userInput.subList(1, userInput.size())){
+            if(prev+1 != x){
+                copy(stringb, start, prev).append(", ");
+                start = x;
+            }
+            prev = x;
+        }
+        String result = copy(stringb, start, prev).toString();
 
-        return summary;
+        return result;
     }
 
     public static void main(String[] args){
@@ -38,9 +58,7 @@ public class Impact implements NumberRangeSummarizer{
         
         Impact thabos = new Impact();
         Collection<Integer> fongkong = thabos.collect(jude);
-
-
-        String ranges = compress(asList(1,2,3,4,5, 12,13,14, 19)).collect(joining("-"));
+        System.out.println(thabos.summarizeCollection(fongkong));
         
     }
 
